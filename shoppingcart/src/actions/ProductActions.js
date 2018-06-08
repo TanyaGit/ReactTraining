@@ -22,3 +22,7 @@ export function addToCart(product){
 export function deleteProduct(id){
     return({type: "DELETE_PRODUCT", payload: id})
 }
+
+export function getProducts(data){
+    return ({type: "GET_PRODUCTS",payload:data})
+}

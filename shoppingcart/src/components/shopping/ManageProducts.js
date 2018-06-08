@@ -1,23 +1,29 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import axios from "axios";
 
-import {addProduct,deleteProduct,updateProduct} from "../../actions/ProductActions";
+import {addProduct,deleteProduct,updateProduct,getProducts} from "../../actions/ProductActions";
 
 
 class ManageProducts extends Component {
 
+    constructor(){
+        super()
+        this.apiUrl="http://localhost:4000/wsproducts"
+
+    }
         
     createTable = (product) => {
         let output = null;
         console.log("createTable:product: ", product)
         if(product.length > 0){
             output = product.map((product) => {
-                return (<tr key={product.id}>
+                return (<tr key={product._id}>
                     <td>{product.name}</td>
                     <td>{product.price}</td>
                     <td>
-                        <button onClick={ () => this.handleDelete(product.id) } className="btn btn-danger">Delete</button>
+                        <button onClick={ () => this.handleDelete(product._id) } className="btn btn-danger">Delete</button>
                     
                         <button onClick={ () => this.editProduct(product) } className="btn btn-success">Edit</button>
                         </td>
@@ -68,28 +74,55 @@ class ManageProducts extends Component {
              </div>
         );
     }
+    componentDidMount(){
+        axios.get(this.apiUrl).then((response)=>{
+            console.log("Get Response", response.data)
+            this.props.getProducts(response.data);
+        },(err) =>{
+            console.log("get Error", err)
+        }
+
+    
+    )
+    }
     handleAdd =() =>{
 
-        let newproduct ={id: this.refs.pid.value,
+        let newproduct ={
                          name:this.refs.pname.value,   
                          price:this.refs.price.value}
-                         this.props.addProduct(newproduct)
+                         //this.props.addProduct(newproduct)
+                         axios.post(this.apiUrl,newproduct).then(
+                        (response) => {
+                            this.props.addProduct(response.data)
+                         }, (err) =>{
+                            console.log("Error Logged");
+                         })
 
     }
     
     handleDelete =(id) =>{
 
-         this.props.deleteProduct(id)
+         //this.props.deleteProduct(id)
+         axios.delete(this.apiUrl+"/"+id).then((response) => {
+             this.props.deleteProduct(id)
+         }, (err) =>{
+            console.log("Error Logged");
+         })
 
     }
     handleUpdate =() =>{
-        let modifiedProduct ={id: this.refs.pid.value,
+        let modifiedProduct ={_id: this.refs.pid.value,
             name:this.refs.pname.value,   
             price:this.refs.price.value}
-            this.props.updateProduct(modifiedProduct)  
+            axios.put(this.apiUrl+"/"+modifiedProduct._id,modifiedProduct).then((response)=>{
+                this.props.updateProduct(modifiedProduct)  
+            },(err) =>{
+                console.log("update Error");
+            })
+            
     }
     editProduct =(product) =>{
-        this.refs.pid.value=product.id;
+        this.refs.pid.value=product._id;
         this.refs.pname.value=product.name;
         this.refs.price.value=product.price;
 
@@ -99,10 +132,10 @@ class ManageProducts extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({addProduct,deleteProduct,updateProduct}, dispatch);
+    return bindActionCreators({addProduct,deleteProduct,updateProduct,getProducts}, dispatch);
 }
 
-/*
+/*npm
 Following single function is divided into above two functions and bindActionCreators would be used with it
 function mapDispatchToProps(dispatch){
     return {
