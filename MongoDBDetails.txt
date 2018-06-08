@@ -1,0 +1,103 @@
+{
+	"name":"product5",
+	"price":7000,
+	"description":"New One Added"
+	
+}
+db.cln_products.update({"_id":Object ID Value”)},{$set:{name:"Value"}}})
+db.cln_products.update({"_id" : ObjectId("5b18f388ec53fa9a026de2f4")},{$set:{name:"Samsung Galaxy S"}})
+
+> db.cln_products.find()
+{ "_id" : ObjectId("5b18f388ec53fa9a026de2f4"), "name" : "Samsung Galaxy S", "pr
+ice" : 70000 }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de2f5"), "name" : "Sony", "price" : 17000
+0 }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de2f6"), "name" : "Apple", "price" : 8000
+00 }
+{ "_id" : ObjectId("5b18f423ec53fa9a026de2f7"), "name" : "Sony LCD", "price" : 7
+7000 }
+{ "_id" : ObjectId("5b18f423ec53fa9a026de2f8"), "name" : "Apple Watch", "price"
+: 40000 }
+>
+
+Add new field to existing document
+db.cln_products.update({"_id" : ObjectId("5b18f388ec53fa9a026de2f4")},{$set:{description:"Samsung Smart Phone"}})
+
+db.cln_products.update({"_id":Object ID Value”)},{$set:{name:"Value"}}})
+db.cln_products.update({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{description:"Refigerator"}},{upsert:true})
+db.cln_products.update({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{description:"Whirlpool"}})
+
+*************************************************************************************************************
+
+> db.cln_products.find()
+{ "_id" : ObjectId("5b18f388ec53fa9a026de2f4"), "name" : "Samsung Galaxy S", "pr
+ice" : 70000, "description" : "Samsung Smart Phone" }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de2f5"), "name" : "Sony", "price" : 17000
+0 }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de2f6"), "name" : "Apple", "price" : 8000
+00 }
+{ "_id" : ObjectId("5b18f423ec53fa9a026de2f7"), "name" : "Sony LCD", "price" : 7
+7000 }
+{ "_id" : ObjectId("5b18f423ec53fa9a026de2f8"), "name" : "Apple Watch", "price"
+: 40000 }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de235"), "description" : "Refigerator" }
+> db.cln_products.update({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{d
+escription:"Whirlpool"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cln_products.find()
+{ "_id" : ObjectId("5b18f388ec53fa9a026de2f4"), "name" : "Samsung Galaxy S", "pr
+ice" : 70000, "description" : "Samsung Smart Phone" }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de2f5"), "name" : "Sony", "price" : 17000
+0 }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de2f6"), "name" : "Apple", "price" : 8000
+00 }
+{ "_id" : ObjectId("5b18f423ec53fa9a026de2f7"), "name" : "Sony LCD", "price" : 7
+7000 }
+{ "_id" : ObjectId("5b18f423ec53fa9a026de2f8"), "name" : "Apple Watch", "price"
+: 40000 }
+{ "_id" : ObjectId("5b18f3efec53fa9a026de235"), "description" : "Whirlpool" }
+>
+db.cln_products.remove({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{description:"Whirlpool"}})
+
+
+
+
+ db.cln_products.update({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{d
+scription:"Whirlpool"}})
+riteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+ db.cln_products.find()
+ "_id" : ObjectId("5b18f388ec53fa9a026de2f4"), "name" : "Samsung Galaxy S", "pr
+ce" : 70000, "description" : "Samsung Smart Phone" }
+ "_id" : ObjectId("5b18f3efec53fa9a026de2f5"), "name" : "Sony", "price" : 17000
+ }
+ "_id" : ObjectId("5b18f3efec53fa9a026de2f6"), "name" : "Apple", "price" : 8000
+0 }
+ "_id" : ObjectId("5b18f423ec53fa9a026de2f7"), "name" : "Sony LCD", "price" : 7
+000 }
+ "_id" : ObjectId("5b18f423ec53fa9a026de2f8"), "name" : "Apple Watch", "price"
+ 40000 }
+ "_id" : ObjectId("5b18f3efec53fa9a026de235"), "description" : "Whirlpool" }
+
+
+
+ db.cln_products.remove({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{d
+
+.. escription:"Whirlpool"}})
+018-06-07T14:47:08.306+0530 E QUERY    [thread1] SyntaxError: missing : after p
+operty id @(shell):2:0
+ db.cln_products.remove({"_id" : ObjectId("5b18f3efec53fa9a026de235")},{$set:{d
+scription:"Whirlpool"}})
+riteResult({ "nRemoved" : 1 })
+
+ db.cln_products.find()
+ "_id" : ObjectId("5b18f388ec53fa9a026de2f4"), "name" : "Samsung Galaxy S", "pr
+ce" : 70000, "description" : "Samsung Smart Phone" }
+ "_id" : ObjectId("5b18f3efec53fa9a026de2f5"), "name" : "Sony", "price" : 17000
+ }
+ "_id" : ObjectId("5b18f3efec53fa9a026de2f6"), "name" : "Apple", "price" : 8000
+0 }
+ "_id" : ObjectId("5b18f423ec53fa9a026de2f7"), "name" : "Sony LCD", "price" : 7
+000 }
+ "_id" : ObjectId("5b18f423ec53fa9a026de2f8"), "name" : "Apple Watch", "price"
+ 40000 }
+
